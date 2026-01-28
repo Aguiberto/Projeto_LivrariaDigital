@@ -1,0 +1,1 @@
+record Livro(String autor, Strig titulo, int ano, boolean disponibilidade){}
