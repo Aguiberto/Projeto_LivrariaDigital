@@ -1,0 +1,1 @@
+record Cliente(String nome, String sexo, String cpf, int idade){};
