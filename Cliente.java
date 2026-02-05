@@ -1,1 +1,1 @@
-record Cliente(String nome, String sexo, String cpf, int idade){};
+record Cliente(String nome, String sexo, String cpf, int idade, String matricula){};
