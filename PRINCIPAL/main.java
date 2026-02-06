@@ -49,7 +49,7 @@ public class Main{
                     System.out.println("Digite o id do livro que deseja pegar emprestado: ");
                     id = scanner.nextInt();
                     scanner.nextLine();
-                    servicos.emprestarLivro(livros,id);
+                    servicos.emprestarLivro(livros,carteira_clientes,id);
                     
 
                     break;
@@ -74,22 +74,24 @@ public class Main{
 
                     break;
 
-                case 6: // Encerrar programa
-
-                    stop = true;
-                    System.out.println("Programa encerrado !");
-
-                    break;
-
-                case 7:
+                case 6:
 
                     Cliente novo_cliente = servicos.cadastrarCliente();
                     carteira_clientes.add(novo_cliente);
                     break;
 
-                case 8:
+                case 7:
 
                     servicos.listarClientes(carteira_clientes);
+                    scanner.nextLine();
+
+
+                case 8: // Encerrar programa
+
+                    stop = true;
+                    System.out.println("Programa encerrado !");
+
+                    break;
             }
 
         }while(!stop);

@@ -15,7 +15,9 @@ public class Biblioteca{
         System.out.println("3. Emprestimo de livro");
         System.out.println("4. Devolver livro");
         System.out.println("5. Excluir livro");
-        System.out.println("6. Encerrar programa");
+        System.out.println("6. Cadastrar cliente");
+        System.out.println("7. Listar clientes");
+        System.out.println("8. Encerrar programa");
         System.out.println("========================");
 
 
@@ -110,7 +112,23 @@ public class Biblioteca{
 
     }
 
-    public void emprestarLivro(ArrayList<Livro> livros , int id){
+    public void emprestarLivro(ArrayList<Livro> livros , ArrayList<Cliente> carteira_clientes, int id){
+
+        System.out.println("Digite o CPF do cliente: ");
+        String cpfCliente = scanner.nextLine();
+
+        Cliente clienteEncontrado = null;
+        for(Cliente c:carteira_clientes){
+            if(c.getCPF().equals(cpfCliente)){
+                clienteEncontrado = c;
+                break;
+            }
+        }
+
+        if(clienteEncontrado == null){
+            System.out.println("Cliente não cadastrado!");
+            return ;
+        }
 
         //Percorre toda a lista de livros verificando se existo o id informado
         for(Livro livro: livros){

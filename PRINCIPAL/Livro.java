@@ -7,6 +7,7 @@ class Livro{
    private int ano; 
    private boolean disponibilidade;
    private int codigo;
+   private String cpf_cliente;
     
     // Construtor
     public Livro(String autor, String titulo, int ano, int codigo){
@@ -57,6 +58,11 @@ class Livro{
 
     public int getId(){
         return codigo;
+    }
+
+    public void ocuparLivro(String cpf){
+        this.cpf_cliente = cpf;
+        setDisponibilidade(false);
     }
 
      @Override
