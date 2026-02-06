@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Dashboard{
+public class Biblioteca{
 
     Scanner scanner = new Scanner (System.in);
 

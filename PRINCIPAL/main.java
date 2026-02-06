@@ -2,14 +2,14 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 
-public class Principal{
+public class main{
 
     public static void main(String args[]){
 
         Scanner scanner = new Scanner(System.in);
         ArrayList<Livro> livros = new ArrayList<>();
 
-        Dashboard servicos = new Dashboard();
+        Biblioteca servicos = new Biblioteca();
         boolean stop = false;
         int id_livro = 1;
         int id;
@@ -42,9 +42,6 @@ public class Principal{
                     break;
 
                 case 3:
-
-                    System.out.println("Informe o nome do cliente: ");
-                    cliente = nextLine();
 
                     System.out.println("Digite o id do livro que deseja pegar emprestado: ");
                     id = scanner.nextInt();
