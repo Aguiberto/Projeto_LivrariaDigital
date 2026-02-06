@@ -26,6 +26,45 @@ public class Biblioteca{
 
     }
 
+    public Cliente cadastrarCliente(){
+
+        Cliente novo_cliente = new Cliente();
+
+        System.out.println("Informe nome: ");
+        novo_cliente.setNome(scanner.nextLine()) ;
+
+        System.out.println("Informe o sexo: ");
+        novo_cliente.setSexo(scanner.nextLine());
+
+        System.out.println("Informe a idade: ");
+        novo_cliente.setIdade(scanner.nextInt());
+        scanner.nextLine();
+
+        System.out.println("Informe o CPF: ");
+        novo_cliente.setCPF(scanner.nextLine());
+
+       System.out.println("");
+       System.out.println("Cliente cadastrado com sucesso!");
+       System.out.println("");
+
+       return novo_cliente;
+
+    }
+
+    public void listarClientes(ArrayList<Cliente>carteira_clientes){
+
+        if(carteira_clientes.isEmpty()){
+            System.out.println("Não há clientes cadastrados");
+            return;
+        }
+
+        System.out.println("\n ======== LISTA DE CLIENTES ======");
+        for(Cliente c : carteira_clientes){
+            System.out.println(c.toString());
+        }
+        System.out.println("\n =================================");
+    }
+
     public Livro adicionarLivro(int id){
 
         System.out.println("Digite o título do livro: ");
@@ -41,6 +80,9 @@ public class Biblioteca{
 
         System.out.println();
         System.out.println("Livro adicionado!");
+        System.out.println();
+
+
 
         return livro;
     }
@@ -126,16 +168,17 @@ public class Biblioteca{
     }
 
     public void excluirLivro(ArrayList<Livro> livros, int id){
-
+        boolean encontrado = false;
         for(int i = 0; i < livros.size(); i++){
 
             if(livros.get(i).getId() == id){
                 System.out.println("Livro " + livros.get(i).getTitulo() + " removido com sucesso!");
                 livros.remove(i);
-            }else{
-                System.out.println();
-                System.out.println("Esse livro não consta no acervo da biblioteca");
-                System.out.println();
+                encontrado = true;
+                break;
+            }
+            if(!encontrado){
+                System.out.println("\nEsse livro não consta no acervo da biblioteca.\n");
             }
             return;
         }

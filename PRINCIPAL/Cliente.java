@@ -4,11 +4,14 @@ public class Cliente{
     private String sexo;
     private int idade;
     private String cpf;
-    private Livro emprestado;
+    private Livro livro_emprestado;
 
-    public void Client(String nome){
-        this.nome = nome;
-        this.emprestado = null;
+    public Cliente(){
+        // this.nome = nome;
+        // this.sexo = sexo;
+        // this.idade = idade;
+        // this.cpf = cpf;
+        this.livro_emprestado = null;
     }
 
     public String getNome(){
@@ -44,18 +47,18 @@ public class Cliente{
     }
 
     public Livro getEmprestados(){
-        return emprestado;
+        return livro_emprestado;
     }
 
-    public void setEmprestados( Livro emprestado){
-        this.emprestado = emprestado;
+    public void setEmprestados( Livro livro){
+        this.livro_emprestado = livro;
     }
 
     public void alugarLivro(Livro livro){
 
         if(livro.getDisponibilidade()){
 
-            emprestado = livro;
+            livro_emprestado = livro;
             livro.setDisponibilidade(false);
             System.out.println(nome + "alugou o livro:" + livro.getTitulo());
 
@@ -65,14 +68,23 @@ public class Cliente{
     }
 
     public void devolverLivro(Livro livro){
-        if(emprestado != null){
+        if(livro_emprestado != null){
 
-            emprestado.setDisponibilidade(true);
-            emprestado = null;
+            livro_emprestado.setDisponibilidade(true);
+            livro_emprestado = null;
             System.out.println("Livro: " + livro.getTitulo() + "devolvido!");
 
         }else{
             System.out.println(nome + "Não há nenhum livro para devolver");
         }
+    }
+
+    @Override
+    public String toString(){
+        return "Cliente {nome =  " + this.nome + ", " +
+                "sexo =  " + this.sexo + ", " + 
+                "idade =  " + this.idade + ", " +
+                "cpf =  " + this.cpf + ", " +
+                "livro =  " + this.livro_emprestado + "}";
     }
 }
