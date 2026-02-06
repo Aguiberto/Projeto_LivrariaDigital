@@ -85,6 +85,8 @@ public class Main{
                     servicos.listarClientes(carteira_clientes);
                     scanner.nextLine();
 
+                    break;
+
 
                 case 8: // Encerrar programa
 
