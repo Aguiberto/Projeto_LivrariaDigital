@@ -11,12 +11,13 @@ public class Main{
         ArrayList<Livro> livros = new ArrayList<>();
         ArrayList<Cliente> carteira_clientes = new ArrayList<>();
 
-       
-        Biblioteca servicos = new Biblioteca();
         boolean stop = false;
         int id_livro = 1;
         int id;
-        String cliente;
+
+        Biblioteca servicos = new Biblioteca();
+     
+        ArrayList<Emprestimo> emprestimos = new ArrayList<>();
 
 
         /*Laço que faz que ser mostrado a tela de opções
@@ -49,7 +50,7 @@ public class Main{
                     System.out.println("Digite o id do livro que deseja pegar emprestado: ");
                     id = scanner.nextInt();
                     scanner.nextLine();
-                    servicos.emprestarLivro(livros,carteira_clientes,id);
+                    servicos.emprestarLivro(livros, carteira_clientes, emprestimos, id);
                     
 
                     break;
@@ -60,7 +61,7 @@ public class Main{
                     id = scanner.nextInt();
                     scanner.nextLine();
 
-                    servicos.devolverLivro(livros, id);
+                    servicos.devolverLivro(livros, emprestimos, id);
 
                     break;
 
@@ -86,9 +87,16 @@ public class Main{
                     scanner.nextLine();
 
                     break;
+                
+                 case 8:
+
+                    servicos.verEmprestimos(emprestimos);
+                    scanner.nextLine();
+
+                    break;    
 
 
-                case 8: // Encerrar programa
+                case 9: // Encerrar programa
 
                     stop = true;
                     System.out.println("Programa encerrado !");

@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Biblioteca{
@@ -17,7 +19,8 @@ public class Biblioteca{
         System.out.println("5. Excluir livro");
         System.out.println("6. Cadastrar cliente");
         System.out.println("7. Listar clientes");
-        System.out.println("8. Encerrar programa");
+        System.out.println("8. Ver emprestimos");
+        System.out.println("9. Encerrar programa");
         System.out.println("========================");
 
 
@@ -25,8 +28,24 @@ public class Biblioteca{
         scanner.nextLine();
 
         return opcao;
-
     }
+
+    public void verEmprestimos(ArrayList<Emprestimo> emprestimos){
+
+        if(emprestimos.isEmpty()){
+            System.out.println("Não há emprestimos ativos");
+            return;
+        }
+
+        System.out.println("\n ======== LISTA DE EMPRESTIMOS ======");
+
+        for(Emprestimo e : emprestimos){
+            System.out.println(e.toString());
+        }
+
+        System.out.println("\n =====================================");
+    }
+    
 
     public Cliente cadastrarCliente(){
 
@@ -112,12 +131,13 @@ public class Biblioteca{
 
     }
 
-    public void emprestarLivro(ArrayList<Livro> livros , ArrayList<Cliente> carteira_clientes, int id){
+    public void emprestarLivro(ArrayList<Livro> livros , ArrayList<Cliente> carteira_clientes, ArrayList<Emprestimo> emprestimos, int id){
 
         System.out.println("Digite o CPF do cliente: ");
         String cpfCliente = scanner.nextLine();
 
         Cliente clienteEncontrado = null;
+
         for(Cliente c:carteira_clientes){
             if(c.getCPF().equals(cpfCliente)){
                 clienteEncontrado = c;
@@ -130,17 +150,25 @@ public class Biblioteca{
             return ;
         }
 
-        //Percorre toda a lista de livros verificando se existo o id informado
+        //Percorre toda a lista de livros verificando se existe o id informado
         for(Livro livro: livros){
 
             if(livro.getId() == id){
+
             //verifica se existe o id do livro solicitado   
 
                 if(livro.getDisponibilidade()){
                 /*Se a disponibilidade do livro for verdadeira então
                 o livro emprestado e sua dispobilidade muda */
 
-                    livro.setDisponibilidade(false);
+                    
+                    Emprestimo novoEmprestimo = new Emprestimo(livro, clienteEncontrado);
+                    emprestimos.add(novoEmprestimo);
+
+                    // a ordem importa aqui , primeiro alugo , depois o livro fica indisponivel
+                    clienteEncontrado.alugarLivro(livro); 
+                    livro.ocuparLivro(clienteEncontrado.getCPF());
+
                     System.out.println("Livro: "+ livro.getTitulo() + ", emprestado com sucesso!");
                     System.out.println();
 
@@ -159,13 +187,53 @@ public class Biblioteca{
         System.out.println();
     }
 
-    public void devolverLivro(ArrayList<Livro> livros, int id){
+    public void devolverLivro(ArrayList<Livro> livros, ArrayList<Emprestimo> emprestimos, int id){
 
         for(Livro livro: livros){
 
             if(livro.getId() == id){
                 if(livro.getDisponibilidade() == false){
                     livro.setDisponibilidade(true);
+                    
+                    Emprestimo emprestimoEncontrado = null;
+                    for(Emprestimo emp : emprestimos){
+                        if(emp.getLivro().getId() == id){
+                            emprestimoEncontrado = emp;
+                            break;
+                        }
+                    }
+
+                    if(emprestimoEncontrado != null){
+                        // Se o empréstimo foi encontrado, solicita a data de devolução
+                        System.out.println("Informe a data de devolução (dd/MM/yyyy): ");
+                        String valorData = scanner.nextLine();
+                        LocalDate dataDevolucao;
+                        
+                        DateTimeFormatter formatacaoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                      
+                        dataDevolucao = LocalDate.parse(valorData, formatacaoData);
+        
+                        emprestimoEncontrado.devolver(dataDevolucao);
+                        double multa = emprestimoEncontrado.calcularMulta();
+                        
+                        if(multa > 0){
+                            System.out.println("ATENÇÃO: Devolução com atraso! Multa de R$ " + multa);
+                        } else {
+                            System.out.println("Devolução dentro do prazo. Sem multa.");
+                        }
+                        
+                        // Atualizar cliente
+                        Cliente cliente = emprestimoEncontrado.getCliente();
+                        if(cliente != null){
+                            cliente.devolverLivro(livro);
+                        }
+                        
+                        // Remover da lista de empréstimos ativos
+                        emprestimos.remove(emprestimoEncontrado);
+                    }
+
+                    livro.desocuparLivro();
+
                     System.out.println();
                     System.out.println("Livro " + livro.getTitulo() + " devolvido");
                     System.out.println();

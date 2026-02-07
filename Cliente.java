@@ -39,7 +39,7 @@ public class Cliente{
     }
 
     public String getCPF(){
-        return cpf;
+        return this.cpf;
     }
 
     public void setCPF(String cpf){
@@ -47,7 +47,7 @@ public class Cliente{
     }
 
     public Livro getEmprestados(){
-        return livro_emprestado;
+        return this.livro_emprestado;
     }
 
     public void setEmprestados( Livro livro){
@@ -56,11 +56,16 @@ public class Cliente{
 
     public void alugarLivro(Livro livro){
 
+        System.out.println("Disponibilidade: " + livro.getDisponibilidade());
+        
         if(livro.getDisponibilidade()){
+            System.out.println("Alugando livro: " + livro.getTitulo() + " por " + this.nome);
 
-            livro_emprestado = livro;
+            this.livro_emprestado = livro;
+
+            System.out.println("Livro: " + this.livro_emprestado);
             livro.setDisponibilidade(false);
-            System.out.println(nome + "alugou o livro:" + livro.getTitulo());
+            System.out.println(nome + " alugou o livro:" + livro.getTitulo());
 
         }else{
             System.out.println("Livro "+ livro.getTitulo()+ " indisponível");
@@ -75,7 +80,7 @@ public class Cliente{
             System.out.println("Livro: " + livro.getTitulo() + "devolvido!");
 
         }else{
-            System.out.println(nome + "Não há nenhum livro para devolver");
+            System.out.println(nome + " Não há nenhum livro para devolver");
         }
     }
 

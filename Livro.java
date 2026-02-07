@@ -49,7 +49,7 @@ class Livro{
     }
 
     public boolean getDisponibilidade(){
-        return disponibilidade;
+        return this.disponibilidade;
     }
 
     public void setId(int id){
@@ -57,12 +57,20 @@ class Livro{
     }
 
     public int getId(){
-        return codigo;
+        return this.codigo;
     }
 
     public void ocuparLivro(String cpf){
         this.cpf_cliente = cpf;
         setDisponibilidade(false);
+    }
+    public void desocuparLivro(){
+        this.cpf_cliente = null;
+        setDisponibilidade(true);
+    }
+
+    public String getCpfCliente(){
+        return this.cpf_cliente;
     }
 
      @Override
