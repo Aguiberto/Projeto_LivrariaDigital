@@ -20,4 +20,7 @@ Esse projeto tem como objetivo praticar a Programação Orientada a Objetos apli
 
     - Histórico de empréstimos
 
+## Diagrama UML
 
+
+![Diagrama de Classes](Diagrama_UML.pdf)
