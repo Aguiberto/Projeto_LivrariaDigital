@@ -169,8 +169,8 @@ public class Biblioteca{
                     clienteEncontrado.alugarLivro(livro); 
                     livro.ocuparLivro(clienteEncontrado.getCPF());
 
-                    System.out.println("Livro: "+ livro.getTitulo() + ", emprestado com sucesso!");
-                    System.out.println();
+                    //System.out.println("Livro: "+ livro.getTitulo() + ", emprestado com sucesso!");
+                    //System.out.println();
 
                 }else{
                     System.out.println();

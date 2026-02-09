@@ -56,16 +56,19 @@ public class Cliente{
 
     public void alugarLivro(Livro livro){
 
-        System.out.println("Disponibilidade: " + livro.getDisponibilidade());
+        //System.out.println("Disponibilidade: " + livro.getDisponibilidade());
         
         if(livro.getDisponibilidade()){
-            System.out.println("Alugando livro: " + livro.getTitulo() + " por " + this.nome);
+            //System.out.println("Alugando livro: " + livro.getTitulo() + " por " + this.nome);
 
             this.livro_emprestado = livro;
 
-            System.out.println("Livro: " + this.livro_emprestado);
+            //System.out.println("Livro: " + this.livro_emprestado);
             livro.setDisponibilidade(false);
-            System.out.println(nome + " alugou o livro:" + livro.getTitulo());
+            System.out.println(nome + " alugou o livro: " + livro.getTitulo());
+            System.out.print("\nO prazo para a devolução é de 7 dias corridos.");
+            System.out.print("\nA multa por atraso é de 5,00 R$ por dia.\n");
+
 
         }else{
             System.out.println("Livro "+ livro.getTitulo()+ " indisponível");
