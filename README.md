@@ -1,5 +1,7 @@
 # Projeto de gerenciamento de biblioteca
 
+Esse projeto tem como objetivo praticar a Programação Orientada a Objetos aplicando na prática os conceitos que foram ministrados em sala de aula. 
+
 ## Objetivos
 1. Realizar cadastros:
 
@@ -15,5 +17,7 @@
     - Multa por dano
 
 3. Gerar relatórios dos livros mais emprestados.
+
+    - Histórico de empréstimos
 
 
