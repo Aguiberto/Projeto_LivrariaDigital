@@ -23,4 +23,4 @@ Esse projeto tem como objetivo praticar a Programação Orientada a Objetos apli
 ## Diagrama UML
 
 
-![Diagrama de Classes](Diagrama_UML.pdf)
+![Diagrama de Classes](Diagrama_UML/Diagramas%20UML.png)
