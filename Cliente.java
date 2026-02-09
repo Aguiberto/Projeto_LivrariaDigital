@@ -80,7 +80,7 @@ public class Cliente{
 
             livro_emprestado.setDisponibilidade(true);
             livro_emprestado = null;
-            System.out.println("Livro: " + livro.getTitulo() + "devolvido!");
+            // System.out.println("Livro: " + livro.getTitulo() + "devolvido!");
 
         }else{
             System.out.println(nome + " Não há nenhum livro para devolver");
